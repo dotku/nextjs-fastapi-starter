@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://nextjs-fastapi-starter.vercel.app/">
-    ![vercel logo](https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png")
+    ![vercel logo](https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png)
     <h3 align="center">Next.js FastAPI Starter</h3>
   </a>
 </p>
