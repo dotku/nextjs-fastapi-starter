@@ -27,6 +27,13 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20
 texts = text_splitter.split_documents(documents)
 print("done splitting files: ", len(texts), "texts")
 
+load_dotenv()
+
+PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+PINECONE_ENV = os.getenv('PINECONE_ENV')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+INDEX_NAME = os.getenv('INDEX_NAME')
+
 app = FastAPI()
 
 @app.get("/api/python")
