@@ -31,6 +31,35 @@ PINECONE_ENV = os.getenv('PINECONE_ENV')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 INDEX_NAME = os.getenv('INDEX_NAME')
 
+pinecone.init(
+        api_key = PINECONE_API_KEY,
+        environment = PINECONE_ENV
+)
+
+index = pinecone.Index(INDEX_NAME)
+index.describe_index_stats()
+
+embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+
+print("done loading embeddings: ", len(embeddings), "embeddings")
+
+docsearch = Pinecone.from_documents(texts, embeddings, index_name = INDEX_NAME)
+
+llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
+
+def parse_response(response):
+    print(response['result'])
+    print('\n\nSources:')
+    for source_name in response["source_documents"]:
+        print(source_name.metadata['source'], "page #:", source_name.metadata['page'])
+
+retriever = docsearch.as_retriever(include_metadata=True, metadata_key = 'source')
+
+qa_chain = RetrievalQA.from_chain_type(llm=llm,
+                                  chain_type="stuff",
+                                  retriever=retriever,
+                                  return_source_documents=True)
+
 app = FastAPI()
 
 @app.get("/api/python")
