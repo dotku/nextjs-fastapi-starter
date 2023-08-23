@@ -87,7 +87,6 @@ mdurl==0.1.2
 multidict==4.7.6
 mypy-extensions==1.0.0
 names==0.3.0
-nocode-execution-genstudiopy-genstudiopy==0.10.4
 nomic==1.1.4
 num2words==0.5.12
 numexpr==2.8.4
